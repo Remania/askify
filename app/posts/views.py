@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, url_for, flash, redirect, request, abort
 from flask_login import current_user, login_required
 from app import db
-from app.models import Post
-from app.posts.forms import PostForm
+from app.models import Post, Comment
+from app.posts.forms import PostForm, CommentForm
 
 posts = Blueprint("posts", __name__)
 
@@ -12,10 +12,23 @@ def posts_page():
     post_list = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template("posts/index.html", post_list=post_list)
 
-@posts.route("/posts/<int:post_id>")
+@posts.route("/posts/<int:post_id>", methods=["GET", "POST"])
+@login_required
 def post(post_id):
+    form = CommentForm()
+    comments = Comment.query.order_by(Comment.date_posted.desc()).all()
+    if form.validate_on_submit():
+        comment = Comment(
+            content=form.content.data,
+            user_id=current_user.id,
+            post_id=post_id
+        )
+        db.session.add(comment)
+        db.session.commit()
+        flash("Comment added successfully", category="success")
+        return redirect(url_for("posts.post", post_id=post_id))
     post = Post.query.get_or_404(post_id)
-    return render_template("posts/post.html", post=post)
+    return render_template("posts/post.html", post=post, form=form, comments=comments)
 
 @posts.route("/posts/create", methods=["GET", "POST"])
 @login_required

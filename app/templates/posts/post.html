@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="main-content col-12 col-lg-8 pb-4">
+    <div class="main-content col-12 pb-4">
         <h2 class="display-5">Posts</h2>
         <a class="btn btn-outline-primary" href="{{ url_for('posts.create_post') }}">Create Post</a>
         <hr />
@@ -48,6 +48,45 @@
                         </div>
                     </div>
                 {% endif %}
+                <form class="border-top pt-4" method="post" action="" novalidate>
+                    {{ form.csrf_token }}
+                    <fieldset class="form-group">
+                        <legend class="fs-3 border-bottom mb-3 pb-3">Comments</legend>
+                        <div class="mb-3 fs-5">
+                            {{ form.content.label(class="form-label") }}
+                            {% if form.content.errors %}
+                                {{ form.content(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.content.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.content(class="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="mb-3 fs-5">
+                            {{ form.submit(class="btn btn-primary") }}
+                        </div>
+                    </fieldset>
+                </form>
+                {% for comment in comments %}
+                      <div class="card rounded">
+                        <div class="card-body">
+                        <div class="card-title pb-3 border-bottom">
+                            <img style="width: 4rem;" src="{{url_for('static', filename='avatars/' + comment.author.avatar)}}" class="img-fluid card-img-top rounded-circle border" alt="{{comment.author.name}}">
+                            <span class="mx-2 fs-5 text-capitalize">
+                                <a href="{{ url_for('users.user', name=comment.author.name) }}">{{comment.author.name}}</a>
+                            </span>
+                        </div>
+                        <h5 class="card-title">
+                            Published on 
+                            <span>{{ comment.date_posted.strftime('%Y-%m-%d') }}</span>
+                        </h5>
+                        <p class="card-text pt-2">{{comment.content}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
