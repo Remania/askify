@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login | Askify
+{% endblock %}
+
+{% block content %}
+    <div class="py-3s mb-4 bg-light rounded-3">
+        <div class="container-fluid">
+            <form method="post" action="" novalidate>
+                {{ form.csrf_token }}
+                <fieldset class="form-group">
+                    <legend class="display-5 border-bottom mb-3 pb-3">Login</legend>
+                    <div class="mb-3 fs-5">
+                        {{ form.name.label(class="form-label") }}
+                        {% if form.name.errors %}
+                            {{ form.name(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.name(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="mb-3 fs-5">
+                        {{ form.password.label(class="form-label") }}
+                        {% if form.password.errors %}
+                            {{ form.password(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="mb-3 form-check">
+                        {{ form.remember(class="form-check-input") }}
+                        {{ form.remember.label(class="form-check-label") }}
+                    </div>
+                    <div class="mb-3 fs-5">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                    <small class="text-muted">
+                        <a href="#">Forgot Password?</a>
+                    </small>
+                </fieldset>
+            </form>
+        </div>
+        <hr />
+        <div class="container-fluid pt-1">
+            <small class="text-muted">
+                Need An Account? <a class="ml-2" href="{{ url_for('users.register') }}">Sign up</a>
+            </small>
+        </div>
+    </div>
+{% endblock %}

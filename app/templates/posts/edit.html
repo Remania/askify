@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit Post | Askify
+{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        <form method="post" action="" novalidate>
+            {{ form.csrf_token }}
+            <fieldset class="form-group">
+                <legend class="display-5 border-bottom mb-3 pb-3">Edit Post</legend>
+                <div class="mb-3 fs-5">
+                    {{ form.title.label(class="form-label") }}
+                    {% if form.title.errors %}
+                        {{ form.title(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.title(class="form-control") }}
+                    {% endif %}
+                </div>
+                <div class="mb-3 fs-5">
+                    {{ form.content.label(class="form-label") }}
+                    {% if form.content.errors %}
+                        {{ form.content(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.content.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.content(class="form-control") }}
+                    {% endif %}
+                </div>
+                <div class="mb-3 fs-5">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

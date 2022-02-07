@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    About | Askify
+{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3">
+            <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+                <h1 class="display-3 fw-bold lh-1 pb-3">About</h1>
+                <p class="lead">
+                    <strong>Askify</strong> is a social media app made with Flask and Bootstrap
+                </p>
+            </div>
+            <div class="col-lg-4 p-0 overflow-hidden">
+                <img class="rounded-lg-3 img-fluid" src="{{ url_for('static', filename='images/ask.svg') }}" alt="ask">
+            </div>
+        </div>
+    </div>
+{% endblock %}
