@@ -32,14 +32,14 @@
                 <ul class="d-flex list-unstyled mb-0">
                   {% if not current_user.is_authenticated %}
                     <li class="nav-item">
-                      <a class="nav-link text-primary px-0" href="{{ url_for('users.login') }}">Login</a>
+                      <a class="nav-link text-primary" href="{{ url_for('users.login') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link text-primary" href="{{ url_for('users.register') }}">Register</a>
+                      <a class="nav-link bg-primary text-light rounded" href="{{ url_for('users.register') }}">Register</a>
                     </li>
                   {% else %}
                     <li class="nav-item">
-                      <a class="nav-link text-primary text-capitalize" href="{{ url_for('users.account') }}">{{current_user.name}}</a>
+                      <a class="nav-link bg-primary text-light rounded text-capitalize" href="{{ url_for('users.account') }}">{{current_user.name}}</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link text-primary" href="{{ url_for('users.logout') }}">Logout</a>
