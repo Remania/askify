@@ -12,7 +12,7 @@ login_manager.login_message_category = "info"
 
 def create_app():
     app = Flask(__name__)
-    app.config["SECRET_KEY"] = "4f3f4a82050ddbdae70ed6c54758df80"
+    app.config["SECRET_KEY"] = "samplesecret"
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///askify.db"
 
     db.init_app(app)

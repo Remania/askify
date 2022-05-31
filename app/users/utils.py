@@ -1,4 +1,4 @@
-from flask import url_for, current_app
+from flask import current_app
 import os
 import secrets
 from PIL import Image

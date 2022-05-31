@@ -12,7 +12,7 @@ class PostForm(FlaskForm):
     submit = SubmitField("Create")
 
 class CommentForm(FlaskForm):
-    content = TextAreaField("Content", validators=[
+    content = TextAreaField("Comment", validators=[
         DataRequired()
     ])
     submit = SubmitField("Comment")

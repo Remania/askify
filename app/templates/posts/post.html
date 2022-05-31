@@ -34,14 +34,16 @@
                             <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                <h5 class="modal-title" id="deleteModalLabel">Delete <strong>"{{ post.title }}"?</strong> post</h5>
+                                <h5 class="modal-title" id="deleteModalLabel">
+                                    Delete <!--<strong>"{{ post.title }}"?</strong>--> post?
+                                </h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <form method="post" action="{{ url_for('posts.delete_post', post_id=post.id) }}">
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                                    <form method="post" action="{{ url_for('posts.delete_post', post_id=post.id) }}">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
                             </div>
@@ -71,7 +73,7 @@
                     </fieldset>
                 </form>
                 {% for comment in comments %}
-                      <div class="card rounded">
+                      <div class="card rounded mt-3">
                         <div class="card-body">
                         <div class="card-title pb-3 border-bottom">
                             <img style="width: 4rem;" src="{{url_for('static', filename='avatars/' + comment.author.avatar)}}" class="img-fluid card-img-top rounded-circle border" alt="{{comment.author.name}}">
