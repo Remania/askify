@@ -1,1 +1,1 @@
-web: gunicorn run:remaniaaskify
+web: gunicorn app:remaniaaskify
